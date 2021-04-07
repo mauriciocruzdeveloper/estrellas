@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>valoracion</title>
+	<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+	<section>
+		<img src="img/peli.jpg" id="peli">
+		<h1>El día del fin del mundo<h1/><br/>
+			<p>Una familia se embarca en un peligroso viaje mientras un cometa 
+			se lanza hacia la Tierra.</p> 
+			<p>A medida que el apocalipsis global 
+			se acerca, su increíble viaje culmina en un vuelo desesperado y
+			de última hora a un posible refugio seguro.<p/>
+
+
+		<article>
+			<img src="img/ev_b.png" id="e1">
+			<img src="img/ev_b.png" id="e2">
+			<img src="img/ev_b.png" id="e3">
+			<img src="img/ev_b.png" id="e4">
+			<img src="img/ev_b.png" id="e5"> 
+				
+		</article>
+		
+	</section>		
+	
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>	
+<script>
+$(document).ready(function(){
+	var puntajeacum=0;
+	var puntaje=0;
+	var puntajeint=0;
+	var puntajedec=0;
+	var votacion=0;
+
+	$("img").on("mouseover", function(){
+		pinta(this.id);
+	});
+
+	$("img").on("mouseout", function(){
+		despinta(this.id);
+	});
+
+	$("img").on("click", function(){
+		votacion++;
+		voto(this.id);
+	});
+
+	function pinta(star){
+		console.log(star);
+		star=star.replace('e','');
+		star=parseInt(star);
+		
+		for (var i = 1; i <= star; i++) {
+			$('#e'+ i).attr( "src" , "img/ep_b.png" );	
+		};
+
+		cstar=star+1;
+		console.log(cstar);
+
+		for (var i = cstar; i <= 5; i++) {
+			$('#e'+ i).attr( "src" , "img/ev_b.png" );	
+		};
+	};
+
+	function voto(star){
+		console.log(star);
+		star=star.replace('e','');
+		star=parseInt(star);
+		puntajeacum+=star;
+		puntaje=puntajeacum/votacion;
+		puntajeint=parseInt(puntaje);
+		puntajedec=puntaje-puntajeint;
+
+
+		for (var i = 1; i <= puntajeint; i++) {
+			$('#e'+ i).attr( "src" , "img/ec_b.png" );	
+		};
+
+		cstar=puntajeint+1;
+		console.log(cstar);
+		
+		for (var i = cstar; i <= 5; i++) {
+			$('#e'+ i).attr( "src" , "img/ev_b.png" );	
+		};
+
+		if (puntajedec>=0.5){
+			$('#e'+ cstar).attr( "src" , "img/em_b.png" );
+		};
+	};
+
+
+});
+</script>
+
+</body>
+</html>
+
